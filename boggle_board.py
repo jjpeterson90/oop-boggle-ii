@@ -7,10 +7,11 @@ class BoggleBoard:
       def __init__(self):
             self.game_board =  [ ['', '', '' ,''], ['', '', '', ''], ['', '', '', ''], ['', '', '', ''] ]
             self.display_board = [ ['', '', '' ,''], ['', '', '', ''], ['', '', '', ''], ['', '', '', ''] ]
-            self.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             self.dice = [ ['', '', '' ,''], ['', '', '', ''], ['', '', '', ''], ['', '', '', ''] ]
+            self.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             self.set_initial_tiles()
             
+            # initiate a dictionary of keys called row1-row4, col1-col4, and diag1-2, all assigned to empty string value
             self.words_to_check = {}
             for row in range(4):
                   for col in range(4):
@@ -19,16 +20,23 @@ class BoggleBoard:
             self.words_to_check['diag1'] = ''
             self.words_to_check['diag2'] = ''
 
+      # initial empty board setup
       def set_initial_tiles(self):
             for row in range(4):
                   for col in range(4):
                         self.game_board[row][col] = '_'
 
+      # change the 6 letter values on each of the 16 dice
       def new_dice(self):
             for row in range(4):
                   for col in range(4):
-                        for i in range(6):
-                              self.dice[row][col] += random.choice(self.alphabet)
+                        while len(self.dice[row][col]) < 6:
+                              new_letter = random.choice(self.alphabet)
+                              # prevent duplicate letters on the same dice
+                              if new_letter not in self.dice[row][col]:
+                                    self.dice[row][col] += random.choice(self.alphabet)
+                              else:
+                                    new_letter = random.choice(self.alphabet)
             #print(f'dice faces: \n {self.dice}')
 
       def shake(self):
