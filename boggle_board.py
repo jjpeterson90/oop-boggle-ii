@@ -39,6 +39,7 @@ class BoggleBoard:
                                     new_letter = random.choice(self.alphabet)
             #print(f'dice faces: \n {self.dice}')
 
+      # shake the board - randomize which dice face is "face-up"
       def shake(self):
             for row in range(4):
                   for col in range(4):
@@ -47,13 +48,15 @@ class BoggleBoard:
                               self.game_board[row][col] = 'Qu'
             # self.test_solution()
 
+      # check the words in each row/col/diag against the desired word (forward and backward) for a match
       def include_word(self, desired_word):
             self.find_possible_words()
             for key in self.words_to_check:
                   if self.words_to_check[key] == desired_word or reversed(self.words_to_check[key]) == desired_word:
                         return print('Found a match!')
             return print('Sorry, no word match.')
-            
+      
+      # create a dictionary of all the 4-letter words in each row, col, and both diagonal cases
       def find_possible_words(self):
             for row in range(4):
                   for col in range(4):
@@ -72,6 +75,7 @@ class BoggleBoard:
       #       self.game_board[2][3] = 'D'
             
       def __str__(self):
+            # pad the letters on dice face with spaces to give the board an evenly spaced look
             for row in range(4):
                   for col in range(4):
                         self.display_board[row][col] = self.game_board[row][col]
