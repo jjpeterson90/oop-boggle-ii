@@ -7,7 +7,8 @@ class BoggleBoard:
       def __init__(self):
             self.game_board =  [ ['', '', '' ,''], ['', '', '', ''], ['', '', '', ''], ['', '', '', ''] ]
             self.display_board = [ ['', '', '' ,''], ['', '', '', ''], ['', '', '', ''], ['', '', '', ''] ]
-            self.dice = [ ['', '', '' ,''], ['', '', '', ''], ['', '', '', ''], ['', '', '', ''] ]
+            # self.dice = [ ['', '', '' ,''], ['', '', '', ''], ['', '', '', ''], ['', '', '', ''] ]
+            self.dice = [ '', '', '' ,'', '', '', '', '', '', '', '', '', '', '', '', '' ]
             self.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             self.set_initial_tiles()
             
@@ -28,24 +29,28 @@ class BoggleBoard:
 
       # change the 6 letter values on each of the 16 dice
       def new_dice(self):
-            for row in range(4):
-                  for col in range(4):
-                        while len(self.dice[row][col]) < 6:
+            for this_dice in range(len(self.dice)):
+                  while len(self.dice[this_dice]) < 6:
+                        new_letter = random.choice(self.alphabet)
+                        # prevent duplicate letters on the same dice
+                        if new_letter not in self.dice[this_dice]:
+                              self.dice[this_dice] += random.choice(self.alphabet)
+                        else:
                               new_letter = random.choice(self.alphabet)
-                              # prevent duplicate letters on the same dice
-                              if new_letter not in self.dice[row][col]:
-                                    self.dice[row][col] += random.choice(self.alphabet)
-                              else:
-                                    new_letter = random.choice(self.alphabet)
-            #print(f'dice faces: \n {self.dice}')
+            print(f'dice faces: \n {self.dice}')
 
       # shake the board - randomize which dice face is "face-up"
       def shake(self):
+            random.shuffle(self.dice)
+            count = 0
             for row in range(4):
                   for col in range(4):
-                        self.game_board[row][col] = random.choice(self.dice[row][col])
+                        self.game_board[row][col] = random.choice(self.dice[count])
+                        # print(f'{self.game_board[row][col]}, {self.dice[count]}, {count}')
+                        count += 1
                         if self.game_board[row][col] == 'Q':
                               self.game_board[row][col] = 'Qu'
+                        
             # self.test_solution()
 
       # check the words in each row/col/diag against the desired word (forward and backward) for a match
