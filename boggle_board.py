@@ -12,7 +12,7 @@ class BoggleBoard:
             self.alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             self.set_initial_tiles()
             
-            # initiate a dictionary of keys called row1-row4, col1-col4, and diag1-2, all assigned to empty string value
+            # initiate a dictionary of keys called 'row1'-row4, 'col1'-'col4', and diag1-2, all assigned to empty string value
             self.words_to_check = {}
             for row in range(4):
                   for col in range(4):
@@ -102,3 +102,43 @@ game.shake()
 print(game)
 
 game.include_word('ROAD')
+
+
+"""
+      def find_possible_words(self):
+            for row in range(4):
+                  for col in range(4):
+                        self.words_to_check[f'row{row}'] += self.game_board[row][col]
+                        self.words_to_check[f'col{col}'] += self.game_board[row][col]
+                        if row == col:
+                              self.words_to_check['diag1'] += self.game_board[row][col]
+                        if row + col == 3:
+                              self.words_to_check['diag2'] += self.game_board[row][col]
+
+                        
+  A1  A2  A3  A4  
+  B1  B2  B3  B4  
+  C1  C2  C3  C4  
+  D1  D2  D3  D4  
+  
+  for row in range(4):
+        for col in range(4):
+              r = 0, col = 0   >   'row0' +=            'col1' += 
+              r = 0, col = 1   >   'row0' +=            'col2' +=
+              r = 0, col = 2   >   'row0' +=            'col3' +=
+              r = 0, col = 3   >   'row0' +=            'col4' +=
+              r = 1, col = 0   >   'row1' +=            'col1' +=
+              r = 1, col = 1   >   'row1' +=            'col2' +=
+              r = 1, col = 2   >   'row1' +=            'col3' +=
+              r = 1, col = 3   >   'row1' +=            'col4' +=
+              r = 2, col = 0   >   'row2' +=            'col1' +=
+              r = 2, col = 1   >   'row2' +=            'col2' +=
+              r = 2, col = 2   >   'row2' +=            'col3' +=
+              r = 2, col = 3   >   'row2' +=            'col4' +=
+              r = 3, col = 0   >   'row3' +=            'col1' +=
+              r = 3, col = 1   >   'row3' +=            'col2' +=
+              r = 3, col = 2   >   'row3' +=            'col3' +=
+              r = 3, col = 3   >   'row3' +=            'col4' +=
+
+
+"""
